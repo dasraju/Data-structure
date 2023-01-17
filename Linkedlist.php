@@ -4,6 +4,9 @@ declare(strict_types=1);
  class Linkedlist 
  {
     private $head;
+    private $rear;
+    private $secondLast;
+
 
     public function __construct(){
         $this->head = null;
@@ -137,6 +140,18 @@ declare(strict_types=1);
       }
     }
 
+    public  function addLastWithoutWhile($data) :void{
+       $newNode = new Node();
+       $newNode ->setData($data);
+       if($this->head){
+           $this->secondLast = $this->rear;
+           $this->rear->setNext($newNode);
+           $this->rear = $this->rear->getNext();
+       }else{
+        $this->rear =  $this->head = $newNode;
+       }
+    }
+
     public function printList():void {
         $currentNode = $this->head;
         while($currentNode != null){
@@ -178,13 +193,15 @@ declare(strict_types=1);
  } 
 
    $linklist = new Linkedlist();
-   $linklist->insertAtBack(4);
-   $linklist->insertAtBack(6);
-   $linklist->insertAtBack(8);
-   $linklist->insertAtBack(0);
+   $linklist->addLastWithoutWhile(4);
+   $linklist->addLastWithoutWhile(5);
+   $linklist->addLastWithoutWhile(7);
+  //  $linklist->insertAtBack(6);
+  //  $linklist->insertAtBack(8);
+  //  $linklist->insertAtBack(0);
    $linklist->printList();
-   $linklist->deleteLastNode();
-   $linklist->printList();
+  //  $linklist->deleteLastNode();
+  //  $linklist->printList();
   //  $linklist->insertAtFront(4);
   //  $linklist->insertAtFront(6);
   //  $linklist->insertAtFront(8);
