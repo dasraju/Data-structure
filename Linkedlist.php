@@ -114,21 +114,43 @@ declare(strict_types=1);
         return false;
     }
 
+    public function deleteFirstNode():void{
+      if($this->head){
+        $this->head = $this->head->getNext();
+      }
+
+
+    }
+    
+    public function deleteLastNode():void{
+      if($this->head){
+        $currentNode = $this->head;
+        $previousNode = null;
+          while($currentNode->getNext() != null){
+            $previousNode = $currentNode;
+            $currentNode = $currentNode->getNext();
+          }
+          if($previousNode){
+            $previousNode->setNext(null);
+            unset($currentNode);
+          }
+      }
+    }
+
     public function printList():void {
         $currentNode = $this->head;
         while($currentNode != null){
             echo $currentNode->getData();
             $currentNode = $currentNode->getNext();
            }
-             while($currentNode->getData() != $target && $currentNode->getNext() != null){
-          $previousNode = $currentNode;
-          $currentNode = $currentNode->getNext();
+        
+         
         }
     }
 
 
 
- }
+ 
 
  class Node {
   private $data;
@@ -156,15 +178,17 @@ declare(strict_types=1);
  } 
 
    $linklist = new Linkedlist();
-//    $linklist->insertAtBack(4);
-//    $linklist->insertAtBack(6);
-//    $linklist->insertAtBack(8);
-//    $linklist->insertAtBack(0);
-//    $linklist->printList();
-   $linklist->insertAtFront(4);
-   $linklist->insertAtFront(6);
-   $linklist->insertAtFront(8);
-   $linklist->insertAtFront(0);
+   $linklist->insertAtBack(4);
+   $linklist->insertAtBack(6);
+   $linklist->insertAtBack(8);
+   $linklist->insertAtBack(0);
    $linklist->printList();
+   $linklist->deleteLastNode();
+   $linklist->printList();
+  //  $linklist->insertAtFront(4);
+  //  $linklist->insertAtFront(6);
+  //  $linklist->insertAtFront(8);
+  //  $linklist->insertAtFront(0);
+  //  $linklist->printList();
 
 ?>
