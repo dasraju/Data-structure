@@ -46,12 +46,84 @@ declare(strict_types=1);
 
     }
 
+
+    public function insertAfterSpecificNode($data,$target):void{
+       if($this->head){
+        $currentNode = $this->head;
+        while($currentNode->getData() != $target && $currentNode->getNext() != null){
+          $currentNode = $currentNode->getNext();
+        }
+        if($currentNode->getData() == $target){
+          $newNode = new Node();
+          $newNode->setData($data);
+          $currentNodenext = $currentNode->getNext();
+          $currentNode->setNext($newNode);
+          $newNode->setNext($currentNodenext);
+
+        }
+       }
+    }
+
+    public function insertBeforeSpecificNode($data,$target):void{
+      if($this->head){
+        $previousNode = null;
+
+        $currentNode = $this->head;
+        while($currentNode->getData() != $target && $currentNode->getNext() != null){
+          $previousNode = $currentNode;
+          $currentNode = $currentNode->getNext();
+        }
+        if($currentNode->getData() == $target){
+          $newNode = new Node();
+          $newNode->setData($data);
+          if($previousNode){
+           $previousNode->setNext($newNode);
+           $newNode->setNext($currentNode);
+          }
+          else{
+            $previousNode = $newNode;
+            $previousNode->setNext($currentNode);
+            $this->head = $previousNode;
+          }
+
+        }
+      }
+    }
+
+    public function deleteNode($target) : bool{
+          if($this->head){
+            $currentNode = $this->head;
+            $previousNode = null;
+        
+          while($currentNode->getData() != $target && $currentNode->getNext() != null){
+            $previousNode = $currentNode;
+            $currentNode = $currentNode->getNext();
+          }
+          if($currentNode->getData() == $target){
+            if($previousNode){
+             $previousNode->setNext($currentNode->getNext());
+             unset($currentNode);
+            }else{
+              $this->head = $currentNode->getNext();
+              unset($currentNode);
+            }
+            return true;
+
+          }
+        }
+        return false;
+    }
+
     public function printList():void {
         $currentNode = $this->head;
         while($currentNode != null){
             echo $currentNode->getData();
             $currentNode = $currentNode->getNext();
            }
+             while($currentNode->getData() != $target && $currentNode->getNext() != null){
+          $previousNode = $currentNode;
+          $currentNode = $currentNode->getNext();
+        }
     }
 
 
