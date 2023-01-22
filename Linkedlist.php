@@ -155,7 +155,7 @@ declare(strict_types=1);
 
     public function deleteLastWithoutWhile(){
       
-    }
+    } 
 
     public function printList():void {
         $currentNode = $this->head;
